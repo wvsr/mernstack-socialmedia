@@ -1,0 +1,25 @@
+{
+  "name": "samibook",
+  "version": "1.0.0",
+  "description": "MERN social media website",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm backend/server.js",
+    "dev": "nodemon backend/server.js"
+  },
+  "author": "Wasimul Vari Sami",
+  "license": "ISC",
+  "devDependencies": {
+    "@faker-js/faker": "^7.6.0",
+    "nodemon": "^2.0.20"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-async-handler": "^1.2.0",
+    "express-validator": "^6.14.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.7.5"
+  }
+}
