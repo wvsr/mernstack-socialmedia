@@ -7,6 +7,7 @@ const {
   registerUser,
   updateUser,
   myPosts,
+  userByUserName,
 } = require('../controller/userController')
 
 const router = express.Router()
@@ -31,5 +32,6 @@ router.post(
 )
 router.route('/me/').put(protect, updateUser).delete(protect, deleteUser)
 router.get('/me/posts', protect, myPosts)
+router.get('/profile/:username', protect, userByUserName)
 
 module.exports = router

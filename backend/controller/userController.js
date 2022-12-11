@@ -11,7 +11,7 @@ const postModel = require('../models/postModel.js')
 const loginUser = expressAsyncHandler(async (req, res) => {
   const err = validationResult(req)
   if (!err.isEmpty()) {
-    res.status(400).json({ message: err.array })
+    return res.status(400).json({ message: err.array() })
   }
   const { email, password } = req.body
 
@@ -26,7 +26,8 @@ const loginUser = expressAsyncHandler(async (req, res) => {
       token: generateToken(user._id),
     })
   } else {
-    res.status(400)
+    res.status(401)
+    console.log('goal')
     throw new Error('Invalid credential')
   }
 })
@@ -88,5 +89,23 @@ const myPosts = expressAsyncHandler(async (req, res) => {
     throw new Error('Posts no found')
   }
 })
+const userByUserName = expressAsyncHandler(async (req, res) => {
+  const user = await userModel
+    .findOne({ userName: req.params.username })
+    .select('-password')
+  if (user) {
+    res.json(user)
+  } else {
+    res.status(404)
+    throw new Error('User not found')
+  }
+})
 
-module.exports = { loginUser, registerUser, deleteUser, updateUser, myPosts }
+module.exports = {
+  loginUser,
+  registerUser,
+  deleteUser,
+  updateUser,
+  myPosts,
+  userByUserName,
+}

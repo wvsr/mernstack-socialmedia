@@ -6,7 +6,10 @@ const postModel = require('../models/postModel.js')
 // @Access private
 
 const getPosts = expressAsyncHandler(async (req, res) => {
-  const posts = await postModel.find({}).limit(20).select('-comments')
+  const posts = await postModel
+    .find({})
+    .select('-comments')
+    .populate({ path: 'user', select: 'name' })
   if (posts) {
     const post_ = posts.map((e, i) => {
       if (e.like.find((el) => el.toString() === req.user.id)) {

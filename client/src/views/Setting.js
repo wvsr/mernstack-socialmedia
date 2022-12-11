@@ -1,6 +1,14 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useContext, useEffect } from 'react'
+import { authContext } from '../lib/authContext'
+import { useNavigate } from 'react-router-dom'
 export default function Setting() {
+  const navigate = useNavigate()
+  const { auth, setAuth } = useContext(authContext)
+  useEffect(() => {
+    if (!auth) {
+      navigate('/login')
+    }
+  }, [])
   return (
     <div className='container mx-auto max-w-5xl py-14'>
       <div className='space-y-8 mt-10'>

@@ -1,11 +1,11 @@
 import React from 'react'
-import { FaLevelDownAlt, FaShare, FaComment } from 'react-icons/fa'
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
 import { TfiComment } from 'react-icons/tfi'
 import { RiShareCircleLine } from 'react-icons/ri'
 import { BsThreeDots } from 'react-icons/bs'
+import axios from 'axios'
 
-export default function PostCard() {
+export default function PostCard(post) {
   return (
     <div className='full max-w-2xl px-4 pt-3 pb-4 rounded-2xl shadow-md bg-white border border-gray-100'>
       <div>
@@ -15,16 +15,16 @@ export default function PostCard() {
             src='https://picsum.photos/500/300?random=4'
             alt=''
           />
-          <p className='text-lg flex-1'>Wasimul sami</p>
+          <p className='text-lg flex-1'>{post?.user?.name}</p>
           <span className='text-2xl'>
             <BsThreeDots />
           </span>
         </div>
-        <p className='text-2xl'>Hello my name is sami and i am a badass</p>
+        <p className='text-2xl'>{post?.content}</p>
         <div className='mt-8 pb-1 px-2 text-2xl flex justify-between'>
           <div className='space-x-4'>
             <button className='text-3xl'>
-              <AiOutlineHeart />
+              {post?.myLike ? <AiFillHeart /> : <AiOutlineHeart />}
             </button>
             <button>
               <TfiComment />
